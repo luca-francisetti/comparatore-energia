@@ -21,7 +21,8 @@ menu = st.sidebar.selectbox(
         "🌐 Database Live ARERA (Tutte le Offerte)", 
         "💡 Filtro Mercato Luce", 
         "🔥 Filtro Mercato Gas", 
-        "🎯 Motore di Calcolo Personalizzato al Centesimo"
+        "🎯 Motore di Calcolo Personalizzato al Centesimo",
+        "📖 Legenda & Glossario Energetico"
     ]
 )
 
@@ -147,3 +148,56 @@ elif menu == "🎯 Motore di Calcolo Personalizzato al Centesimo":
         st.subheader("🏆 Le 3 Offerte più convenienti in assolute per il GAS")
         top_g = df_maestro_live[df_maestro_live["Servizio"].isin(["Gas", "Luce & Gas"])].sort_values("Spesa Annua Stimata (€)").head(3)
         st.dataframe(top_g, use_container_width=True)
+
+    # --- CARTELLINO BLUE NAVY IN FONDO AL MOTORE DI CALCOLO ---
+    st.markdown("""
+        <div style="background-color: #1e3a8a; color: white; padding: 20px; border-radius: 10px; border: 1px solid #3b82f6; margin-top: 30px; font-family: sans-serif;">
+            <h4 style="color: #93c5fd; margin-top: 0; margin-bottom: 12px;">ℹ️ Come funziona il motore di calcolo</h4>
+            <p style="margin-bottom: 8px;">• L'utente inserisce i dati della sua bolletta attuale (o i suoi consumi annui e la spesa che affronta oggi).</p>
+            <p style="margin-bottom: 8px;">• L'app calcola e confronta la spesa attuale con le stime delle offerte disponibili.</p>
+            <p style="margin-bottom: 0;">• Il risultato finale mostra chiaramente quanto si spende in totale all'anno con la nuova offerta e quanto si riesce a risparmiare rispetto a ciò che si paga oggi.</p>
+        </div>
+    """, unsafe_allow_html=True)
+
+# --- SEZIONE 5: LEGENDA & GLOSSARIO ENERGETICO (Sfondo bianco e scritte nere) ---
+elif menu == "📖 Legenda & Glossario Energetico":
+    st.header("📖 Legenda & Glossario Energetico")
+    st.markdown("Guida ufficiale ai parametri analizzati dal comparatore e alla loro utilità per una scelta consapevole.")
+
+    st.markdown("""
+    <div style="background-color: #ffffff; color: #000000; padding: 20px; border-radius: 10px; border: 1px solid #d1d5db; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <h3 style="color: #1e3a8a; margin-top: 0;">1. Spesa Annua Stimata</h3>
+        <p><b>Definizione:</b> È la previsione del costo totale che sosterrai in un intero anno (12 mesi) con una specifica offerta, calcolata sulla base dei tuoi consumi stimati o storici.</p>
+        <p><b>Perché è utile prenderla in considerazione:</b> È il parametro fondamentale per confrontare le offerte in modo diretto. Ti permette di capire immediatamente, a parità di consumi, quale operatore ti farà spendere meno in totale alla fine dell'anno, evitando brutte sorprese.</p>
+    </div>
+
+    <div style="background-color: #ffffff; color: #000000; padding: 20px; border-radius: 10px; border: 1px solid #d1d5db; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <h3 style="color: #1e3a8a; margin-top: 0;">2. Costo Commerciale Annuo (Quota Fissa / PCV / QVD)</h3>
+        <p><b>Definizione:</b> È una componente di prezzo fissa stabilita dal fornitore (spesso chiamata <i>Prezzo di Commercializzazione e Vendita</i> per la luce o <i>QVD</i> per il gas) espressa in euro all'anno.</p>
+        <p><b>Perché è utile prenderla in considerazione:</b> Si paga a prescindere da quanto consumi (anche se consumi zero). Se hai consumi bassi (es. seconda casa), un costo commerciale basso incide moltissimo sul risparmio complessivo.</p>
+    </div>
+
+    <div style="background-color: #ffffff; color: #000000; padding: 20px; border-radius: 10px; border: 1px solid #d1d5db; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <h3 style="color: #1e3a8a; margin-top: 0;">3. Consumo Annuo (kWh per Luce / Smc per Gas)</h3>
+        <p><b>Definizione:</b> La quantità complessiva di energia elettrica (in chilowattora) o di gas naturale (in standard metri cubi) consumata in un anno solare.</p>
+        <p><b>Perché è utile prenderla in considerazione:</b> È il dato di partenza indispensabile per il calcolo. Conoscere il consumo reale evita stime errate e permette di dimensionare correttamente l'offerta sulle proprie reali abitudini di vita.</p>
+    </div>
+
+    <div style="background-color: #ffffff; color: #000000; padding: 20px; border-radius: 10px; border: 1px solid #d1d5db; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <h3 style="color: #1e3a8a; margin-top: 0;">4. Prezzo della Materia Prima (Quota Variabile)</h3>
+        <p><b>Definizione:</b> Il costo effettivo della singola unità di energia o gas (es. €/kWh o €/Smc) stabilito dal gestore. Può essere <i>Fisso</i> (bloccato per 12-24 mesi) o <i>Variabile</i> (indicizzato agli indici di borsa PUN per la luce e PSV per il gas).</p>
+        <p><b>Perché è utile prenderla in considerazione:</b> Determina quanto paghi effettivamente per ogni singolo elettrodomestico o riscaldamento acceso. Aiuta a scegliere tra la tranquillità di un prezzo fisso e la convenienza potenziale di un prezzo variabile.</p>
+    </div>
+
+    <div style="background-color: #ffffff; color: #000000; padding: 20px; border-radius: 10px; border: 1px solid #d1d5db; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <h3 style="color: #1e3a8a; margin-top: 0;">5. Spesa per il Trasporto e Gestione del Contatore</h3>
+        <p><b>Definizione:</b> Importi stabiliti dall'Autorità (ARERA) per remunerare i servizi di trasmissione, distribuzione e misura dell'energia sulla rete locale.</p>
+        <p><b>Perché è utile prenderla in considerazione:</b> Sono costi regolati dallo Stato e <b>uguali per tutti i fornitori</b>, indipendentemente da chi scegli. Conoscerli aiuta a comprendere la struttura trasparente e non comprimibile della bolletta.</p>
+    </div>
+
+    <div style="background-color: #ffffff; color: #000000; padding: 20px; border-radius: 10px; border: 1px solid #d1d5db; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <h3 style="color: #1e3a8a; margin-top: 0;">6. Oneri Generali di Sistema</h3>
+        <p><b>Definizione:</b> Corrispettivi destinati alla copertura di costi legati ad attività di interesse generale per il sistema energetico (es. incentivi alle fonti rinnovabili, agevolazioni ferroviarie, ecc.).</p>
+        <p><b>Perché è utile prenderla in considerazione:</b> Come per il trasporto, sono costi fissati per legge e uguali per qualsiasi gestore tu decida di sottoscrivere.</p>
+    </div>
+    """, unsafe_allow_html=True)
