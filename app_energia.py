@@ -4,22 +4,16 @@ import numpy as np
 
 # --- 1. CONFIGURAZIONE PAGINA & STILE ---
 st.set_page_config(
-    page_title="Comparatore Energia",
+    page_title="Comparatore Energia & Gas",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Stile visivo globale: Sfondo Tony Stark + Componenti personalizzati
+# Stile visivo pulito e professionale per il comparatore
 st.markdown("""
     <style>
     .main { color: #ffffff; }
-    .stApp {
-        background: linear-gradient(rgba(14, 17, 23, 0.92), rgba(14, 17, 23, 0.92)), url('tony_stark.png');
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center;
-    }
     .stMetric { 
         background-color: #1e3a8a !important; 
         padding: 15px; 
@@ -59,11 +53,11 @@ menu = st.sidebar.radio(
 )
 
 # =====================================================================
-# SCHERMATA 1: HOME & PANORAMICA (Con Sfondo Tony Stark Vetrina)
+# SEZIONE 1: HOME & PANORAMICA
 # =====================================================================
 if menu == "🏠 Home & Panoramica":
     st.title("🏠 Benvenuto nel Comparatore Energia")
-    st.markdown("La tua dashboard intelligente per analizzare, confrontare e ottimizzare le spese energetiche di luce e gas.")
+    st.markdown("La tua dashboard pulita e intelligente per analizzare, confrontare e ottimizzare le spese energetiche di luce e gas.")
     st.markdown("Usa il menu a tendina nella barra laterale per passare al **Motore di Calcolo** o consultare la **Legenda & Glossario** con tutte le definizioni dei parametri.")
 
 # =====================================================================
@@ -88,7 +82,7 @@ elif menu == "🧮 Motore di Calcolo & Confronto":
     st.subheader("Risultati del Confronto")
 
     # Simulazione calcolo risparmio
-    spesa_nuova_stimata = consumo_annuo * (0.22 + spread_offert) + 120.0 # stima indicativa
+    spesa_nuova_stimata = consumo_annuo * (0.22 + spread_offert) + 120.0 
     risparmio = bolletta_attuale - spesa_nuova_stimata
 
     m1, m2, m3 = st.columns(3)
@@ -96,7 +90,7 @@ elif menu == "🧮 Motore di Calcolo & Confronto":
     m2.metric("Nuova Spesa Stimata", f"€ {spesa_nuova_stimata:,.2f}")
     m3.metric("Risparmio Annuo Potenziale", f"€ {risparmio:,.2f}", delta="Conveniente" if risparmio > 0 else "Da valutare")
 
-    # --- CARTELLINO BLUE NAVY CON LA SPIEGAZIONE RICHIESTA ---
+    # --- CARTELLINO BLUE NAVY CON LA SPIEGAZIONE ---
     st.markdown("""
         <div class="blue-card">
             <h4 style="color: #93c5fd; margin-top: 0; margin-bottom: 12px;">ℹ️ Come funziona il motore di calcolo</h4>
@@ -135,7 +129,7 @@ elif menu == "📖 Legenda & Glossario Energetico":
     <div class="legend-box">
         <h3>4. Prezzo della Materia Prima (Quota Variabile)</h3>
         <p><b>Definizione:</b> Il costo effettivo della singola unità di energia o gas (es. €/kWh o €/Smc) stabilito dal gestore. Può essere <i>Fisso</i> (bloccato per 12-24 mesi) o <i>Variabile</i> (indicizzato agli indici di borsa PUN per la luce e PSV per il gas).</p>
-        <p><b>Perché è utile prenderla in considerazione:</b> Determina quanto paghi effettivamente per ogni singolo elettrofondo o riscaldamento acceso. Aiuta a scegliere tra la tranquillità di un prezzo fisso e la convenienza potenziale di un prezzo variabile.</p>
+        <p><b>Perché è utile prenderla in considerazione:</b> Determina quanto paghi effettivamente per ogni singolo elettrodomestico o riscaldamento acceso. Aiuta a scegliere tra la tranquillità di un prezzo fisso e la convenienza potenziale di un prezzo variabile.</p>
     </div>
 
     <div class="legend-box">
@@ -148,5 +142,7 @@ elif menu == "📖 Legenda & Glossario Energetico":
         <h3>6. Oneri Generali di Sistema</h3>
         <p><b>Definizione:</b> Corrispettivi destinati alla copertura di costi legati ad attività di interesse generale per il sistema energetico (es. incentivi alle fonti rinnovabili, agevolazioni ferroviarie, ecc.).</p>
         <p><b>Perché è utile prenderla in considerazione:</b> Come per il trasporto, sono costi fissati per legge e uguali per qualsiasi gestore tu decida di sottoscrivere.</p>
+    </div>
+    """, unsafe_allow_html=True)
     </div>
     """, unsafe_allow_html=True)
