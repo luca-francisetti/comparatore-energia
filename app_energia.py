@@ -4,16 +4,22 @@ import numpy as np
 
 # --- 1. CONFIGURAZIONE PAGINA & STILE ---
 st.set_page_config(
-    page_title="Comparatore Energia & Legenda",
+    page_title="Comparatore Energia",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Stile visivo globale e colori Blue Navy coordinati
+# Stile visivo globale: Sfondo Tony Stark + Componenti personalizzati
 st.markdown("""
     <style>
     .main { color: #ffffff; }
+    .stApp {
+        background: linear-gradient(rgba(14, 17, 23, 0.92), rgba(14, 17, 23, 0.92)), url('tony_stark.png');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }
     .stMetric { 
         background-color: #1e3a8a !important; 
         padding: 15px; 
@@ -46,15 +52,24 @@ st.sidebar.title("⚡ Menu di Navigazione")
 menu = st.sidebar.radio(
     "Seleziona Sezione:",
     [
+        "🏠 Home & Panoramica",
         "🧮 Motore di Calcolo & Confronto", 
         "📖 Legenda & Glossario Energetico"
     ]
 )
 
 # =====================================================================
-# SEZIONE 1: MOTORE DI CALCOLO & CONFRONTO
+# SCHERMATA 1: HOME & PANORAMICA (Con Sfondo Tony Stark Vetrina)
 # =====================================================================
-if menu == "🧮 Motore di Calcolo & Confronto":
+if menu == "🏠 Home & Panoramica":
+    st.title("🏠 Benvenuto nel Comparatore Energia")
+    st.markdown("La tua dashboard intelligente per analizzare, confrontare e ottimizzare le spese energetiche di luce e gas.")
+    st.markdown("Usa il menu a tendina nella barra laterale per passare al **Motore di Calcolo** o consultare la **Legenda & Glossario** con tutte le definizioni dei parametri.")
+
+# =====================================================================
+# SEZIONE 2: MOTORE DI CALCOLO & CONFRONTO
+# =====================================================================
+elif menu == "🧮 Motore di Calcolo & Confronto":
     st.title("🧮 Motore di Calcolo & Confronto Offerte")
     st.markdown("Inserisci i dati della tua fornitura attuale per confrontarli in tempo reale con le migliori tariffe sul mercato.")
 
@@ -92,7 +107,7 @@ if menu == "🧮 Motore di Calcolo & Confronto":
     """, unsafe_allow_html=True)
 
 # =====================================================================
-# SEZIONE 2: LEGENDA & GLOSSARIO ENERGETICO
+# SEZIONE 3: LEGENDA & GLOSSARIO ENERGETICO
 # =====================================================================
 elif menu == "📖 Legenda & Glossario Energetico":
     st.title("📖 Legenda & Glossario Energetico")
